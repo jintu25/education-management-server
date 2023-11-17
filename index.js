@@ -23,7 +23,12 @@ const client = new MongoClient(uri, {
 
 async function run(){
   try{
-      const coursesCollection = 
+      const coursesCollection = client.db('eSmart-education').collection('courses')
+
+      app.get('/courses', async(req, res) => {
+        const result = await coursesCollection.find().toArray()
+        res.send(result)
+      })
   }
   finally{}
 }
